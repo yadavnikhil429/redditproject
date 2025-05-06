@@ -3,7 +3,7 @@ export const rootapi =  'https://redditbackend-qfhn.onrender.com/api/';
 export const rootapix = 'http://localhost:3001/api/'
 
 export const getSubreddits = async () =>{
-    const response = await fetch(`${rootapix}subreddits?limit=5`);
+    const response = await fetch(`${rootapi}subreddits?limit=5`);
     if (!response.ok) {
         throw new Error('failed to catch subreddits');
     }
@@ -14,7 +14,7 @@ export const getSubreddits = async () =>{
 
 export const getSubredditPosts = async (subreddit) => {
     console.log('Fetching posts for subreddit:', subreddit);
-    const response = await fetch(`${rootapix}posts/${subreddit}?limit=5`);
+    const response = await fetch(`${rootapi}posts/${subreddit}?limit=5`);
 
    if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -26,7 +26,7 @@ export const getSubredditPosts = async (subreddit) => {
 export const getPostComments = async (postId) => {
     console.log('Fetching comments for post ID:', postId);
 
-    const response = await fetch(`${rootapix}comments/${postId}?limit=15`);
+    const response = await fetch(`${rootapi}comments/${postId}?limit=15`);
     if (!response.ok) {
         throw new Error('Could not fetch comments');
     }
