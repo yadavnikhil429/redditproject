@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import cors from 'cors';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = 3001;
 
 const CLIENT_ID = 'BLlDukZrY6usnvDBNeBiMA';
 const CLIENT_SECRET = 'tLOX1ntKFN3R5A07n1xxCGBQSZ7-nw';
@@ -85,6 +85,7 @@ app.get('/api/comments/:postId', async (req, res) => {
         });
 
         const data = await response.json();
+        console.log('Fetched comments:', data[1]);
         res.json(data[1]);
     }  catch (error){
         console.error( 'Error fetching comments:', error);

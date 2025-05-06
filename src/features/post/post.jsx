@@ -14,7 +14,7 @@ import Card from '../../components/card/card';
 import Avatar from '../avatar/avatar';
 import Comment from '../comment/comment';
 
-const Post = ({ post, onToggleComments }) => {
+const Post = ({ post, index, onToggleComments }) => {
     const [voteValue, setVoteValue] = useState(0);
     /**
      * @param {number} newValue
@@ -99,7 +99,7 @@ const Post = ({ post, onToggleComments }) => {
                     </p>
 
                     <button 
-                    type='bitton'
+                    type='button'
                     className={`icon-action-button down-vote ${voteValue === 1 && 'active'}`}
                     aria-label='downvote post'
                     onClick={()=>onHandleVote(-1)}>
@@ -128,7 +128,7 @@ const Post = ({ post, onToggleComments }) => {
                             className={`icon-action-button ${post.showingComments ? 'showing-comments':''}`}
                             type="button"
                             aria-label="comment button"
-                            onClick={()=>onToggleComments(post.permalink)}>
+                            onClick={onToggleComments(index, post.id)}>
                                 <TiMessage className="icon-action"/>
                             </button>
                             {shortenNumber(post.num_comments, 1)}

@@ -13,7 +13,10 @@ export const fetchPosts = createAsyncThunk(
 export const fetchComments = createAsyncThunk(
     'fetchComments/redditPosts',
     async ({postIndex, postId}) => {
+
+        console.log('Fetching comments for post ID:', postIndex, postId);
         const comments = await getPostComments(postId);
+        console.log('Fetched comments:', comments);
         return { postIndex, comments };
     },
 );

@@ -27,6 +27,7 @@ const Home = ()=>{
     }, [dispatch, selectedSubreddit]);
     
     const onToggleComments = (postIndex, postId) => {
+        console.log('postIndex:', postIndex, postId);
         dispatch(fetchComments({ postIndex, postId}))
     };
     
@@ -77,6 +78,7 @@ const Home = ()=>{
                 <Post
                 key={post.id}
                 post={post}
+                index={index}
                 onToggleComments={() => onToggleComments(index, post.id)} />
             ))}
         </div>
