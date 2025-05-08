@@ -12,12 +12,12 @@ export const fetchPosts = createAsyncThunk(
 
 export const fetchComments = createAsyncThunk(
     'fetchComments/redditPosts',
-    async ({postIndex, postId}) => {
+    async ({index, postId}) => {
 
-        console.log('Fetching comments for post ID:', postIndex, postId);
+        console.log('Fetching comments for post ID:', index, postId);
         const comments = await getPostComments(postId);
         console.log('Fetched comments:', comments);
-        return { postIndex, comments };
+        return { index, comments };
     },
 );
 
@@ -72,8 +72,8 @@ const redditSlice = createSlice({
             state.error = true;
         })
         .addCase(fetchComments.pending, (state, action) => {
-           const { postIndex } = action.meta.arg;
-           const post = state.posts[postIndex];
+           const { index } = action.meta.arg;
+           const post = state.posts[index];
              if( post ){
                 post.loadingComments = true;
                 post.error = false;
@@ -81,8 +81,8 @@ const redditSlice = createSlice({
              }
         })
         .addCase(fetchComments.fulfilled, (state, action) =>{
-        const { postIndex, comments } = action.payload;
-        const post = state.posts[postIndex];
+        const { index, comments } = action.payload;
+        const post = state.posts[index];
             if (post) {
                 post.loadingComments = false;
                 post.comments = comments;
@@ -90,8 +90,8 @@ const redditSlice = createSlice({
             }
         })
         .addCase(fetchComments.rejected, (state, action) => {
-            const { postIndex } = action.meta.arg;
-            const post = state.posts[postIndex];
+            const { index } = action.meta.arg;
+            const post = state.posts[index];
             if (post) {
                 post.loadingComments = false;
                 post.error = true;

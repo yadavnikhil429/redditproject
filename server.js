@@ -41,7 +41,7 @@ app.get('/api/posts/:subreddit', async (req, res) => {
     const token = await getAccessToken();
     const subreddit = req.params.subreddit;
 
-    const response = await fetch(`https://oauth.reddit.com/r/${subreddit}`, {
+    const response = await fetch(`https://oauth.reddit.com/${subreddit}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         'User-Agent': 'MyRedditApp/0.1',
@@ -77,6 +77,9 @@ app.get('/api/comments/:postId', async (req, res) => {
         const token = await getAccessToken();
         const postId = req.params.postId;
 
+        console.log('Fetching comments for post ID:', postId);
+
+
         const response = await fetch(`https://oauth.reddit.com/comments/${postId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -84,9 +87,17 @@ app.get('/api/comments/:postId', async (req, res) => {
             },
         });
 
+      const raw = await  response.text();
+        console.log( 'raw:', raw);
+
         const data = await response.json();
-        console.log('Fetched comments:', data[1]);
-        res.json(data[1]);
+        if(Array.isArray(data)){
+        console.log('reddit response:', data);
+        res.json(data);
+      } else {
+        console.worn('Unexpected response format:', data);
+        res.status(500).json({ error: 'Unexpected response format' });
+      }
     }  catch (error){
         console.error( 'Error fetching comments:', error);
         res.status(500).json({ error: 'Failed to fetch comments from Reddit' });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import skeleton from 'react-loading-skeleton';
+import Skeleton from 'react-loading-skeleton';
 import './post.css';
 import {
     TiArrowUpOutline,
@@ -56,7 +56,7 @@ const Post = ({ post, index, onToggleComments }) => {
     };
 
     const renderComments = () => {
-        if (post.errorCommnets) {
+        if (post.error) {
             return (
                 <div>
                     <h3>Error Loading commnets</h3>
@@ -66,18 +66,18 @@ const Post = ({ post, index, onToggleComments }) => {
         if (post.isLoadingComments) {
             return (
                 <div>
-                    <skeleton count={3} />
+                    <Skeleton count={3} />
                 </div>
             );
         }
-        if (post.showingComments) {
+        if (post.showComments) {
             return (
                 <div>
                     {post.comments.map((comment) => (
                         <Comment key={comment.id} comment={comment} />
                     ))}
                 </div>
-            )
+            );
         }
         return null;
     };
@@ -128,7 +128,7 @@ const Post = ({ post, index, onToggleComments }) => {
                             className={`icon-action-button ${post.showingComments ? 'showing-comments':''}`}
                             type="button"
                             aria-label="comment button"
-                            onClick={onToggleComments(index, post.id)}>
+                            onClick= {() => onToggleComments(index, post.id)}>
                                 <TiMessage className="icon-action"/>
                             </button>
                             {shortenNumber(post.num_comments, 1)}

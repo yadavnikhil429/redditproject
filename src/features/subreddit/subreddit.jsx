@@ -14,6 +14,17 @@ const Subreddit = () => {
         dispatch(fetchSubreddits());
     } ,[dispatch]);
 
+    console.log('subreddits:', subreddits);
+    console.log('selectedSubreddit:', selectdSubreddit);
+
+    if(!subreddits || subreddits.length === 0){
+        return (
+            <div className='loading'>
+                <h2>Loading Subreddits...</h2>
+            </div>
+        );
+    }
+
     return (
         <div>
             <Card className='subreddit-card'>
@@ -25,7 +36,7 @@ const Subreddit = () => {
                         className={`${selectdSubreddit === subreddit.display_name ? 'active' : ''}`}>
                             <button 
                             type='button'
-                            onClick={()=> dispatch(setSelectedSubreddit(subreddit.url))}>
+                            onClick={()=> dispatch(setSelectedSubreddit(subreddit.display_name))}>
                                
                                  <img 
                                  src={subreddit.icon_img || 

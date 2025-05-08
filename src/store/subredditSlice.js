@@ -21,7 +21,7 @@ export const subredditSlice = createSlice({
     reducers: {
         
     },
-    extrareducers: (builder) => {
+    extraReducers: (builder) => {
         builder
         .addCase(fetchSubreddits.pending, (state) => {
             state.loading = true;

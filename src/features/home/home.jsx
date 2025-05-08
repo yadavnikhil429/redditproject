@@ -26,9 +26,9 @@ const Home = ()=>{
         dispatch(fetchPosts(selectedSubreddit));}
     }, [dispatch, selectedSubreddit]);
     
-    const onToggleComments = (postIndex, postId) => {
-        console.log('postIndex:', postIndex, postId);
-        dispatch(fetchComments({ postIndex, postId}))
+    const onToggleComments = (index, postId) => {
+        console.log('postIndex:', index, postId);
+        dispatch(fetchComments({ index, postId}))
     };
     
     if (loading){
