@@ -1,6 +1,7 @@
 
 export const rootapi =  'https://redditbackend-qfhn.onrender.com/api/';
-export const rootapix = 'http://localhost:3001/api/'
+export const rootapix = 'http://localhost:3001/api/';
+
 
 export const getSubreddits = async () =>{
     const response = await fetch(`${rootapi}subreddits?limit=5`);
