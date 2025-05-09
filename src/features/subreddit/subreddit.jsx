@@ -42,6 +42,8 @@ const Subreddit = () => {
                                  src={subreddit.icon_img || 
                                     `https://api.adorable.io/avatars/25/${subreddit.display_name}`} 
                                     alt={subreddit.display_name}
+                                    className='subreddit-icon'
+                                    
                                     />
 
                                  {subreddit.display_name}

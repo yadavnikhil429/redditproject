@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import cors from 'cors';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 10000;
 
 const CLIENT_ID = 'BLlDukZrY6usnvDBNeBiMA';
 const CLIENT_SECRET = 'tLOX1ntKFN3R5A07n1xxCGBQSZ7-nw';
