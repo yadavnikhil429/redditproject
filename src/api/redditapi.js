@@ -1,10 +1,10 @@
 
 export const rootapi =  'https://redditbackend-qfhn.onrender.com/api/';
-export const rootapix = 'http://localhost:3001/api/';
+export const rootapix = 'http://localhost:10000/api/';
 
 
 export const getSubreddits = async () =>{
-    const response = await fetch(`${rootapi}subreddits?limit=5`);
+    const response = await fetch(`${rootapi}subreddits`);
     if (!response.ok) {
         throw new Error('failed to catch subreddits');
     }
@@ -15,13 +15,16 @@ export const getSubreddits = async () =>{
 };
 
 export const getSubredditPosts = async (subreddit) => {
+
     console.log('Fetching posts for subreddit:', subreddit);
-    const response = await fetch(`${rootapi}posts/${subreddit}?limit=5`);
+    const response = await fetch(`${rootapi}posts/${subreddit}`);
 
    if (!response.ok) {
         throw new Error('Network response was not ok');
     }   
     const json = await response.json();
+    console.log('Fetched posts:', json);
+
     return json.data.children.map((post) => (post.data));
 };
 

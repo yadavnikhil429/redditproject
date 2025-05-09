@@ -41,7 +41,7 @@ app.get('/api/posts/:subreddit', async (req, res) => {
     const token = await getAccessToken();
     const subreddit = req.params.subreddit;
 
-    const response = await fetch(`https://oauth.reddit.com/${subreddit}`, {
+    const response = await fetch(`https://oauth.reddit.com/r/${subreddit}.json`, {
       headers: {
         Authorization: `Bearer ${token}`,
         'User-Agent': 'MyRedditApp/0.1',
@@ -75,6 +75,7 @@ app.get('/api/subreddits', async (req, res) =>{
 app.get('/api/comments/:postId', async (req, res) => {
     try {
         const token = await getAccessToken();
+       
         const postId = req.params.postId;
 
         console.log('Fetching comments for post ID:', postId);
@@ -87,10 +88,9 @@ app.get('/api/comments/:postId', async (req, res) => {
             },
         });
 
-      const raw = await  response.text();
-        console.log( 'raw:', raw);
-
         const data = await response.json();
+        console.log('reddit response:', data);
+
         if(Array.isArray(data)){
         console.log('reddit response:', data);
         res.json(data);
